@@ -6,8 +6,6 @@ set -e -o xtrace
 branch_name="${1}"
 token="${2}"
 
-wget https://raw.githubusercontent.com/CSSS/wall_e/master/CI/destroy-dev-env.sh
-
 deleted_discord_branch_channels () {
 	branch_name=$(echo "${1}" | awk '{print tolower($0)}')
 	token="${2}"
