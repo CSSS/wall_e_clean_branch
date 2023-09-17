@@ -1,7 +1,5 @@
 node {
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10'))
-    }
+   logRotator(numToKeepStr: '10', artifactNumToKeepStr: '10')
    stage('Cleanup Branch') {
     // Trigger: GitHub webhook whenever a branch is deleted
     // Action: Delete branch's testing channels and containers
