@@ -40,6 +40,9 @@ deleted_discord_branch_channels () {
 		if [ "${list_of_channel_names[$i]}" = "${branch_name}_mod_channel" ]; then
 			mod_channel_id="${list_of_channel_ids[$i]}"
 		fi		
+		if [ "${list_of_channel_names[$i]}" = "${branch_name}_announcements" ]; then
+			announcements_channel_id="${list_of_channel_ids[$i]}"
+		fi	  
 	done
 	if [ -z "${branch_id}" ]; then
 		echo -e "\nbranch_id was not detected"
@@ -74,6 +77,12 @@ deleted_discord_branch_channels () {
 		url="https://discordapp.com/api/channels/${mod_channel_id}"
 		curl -X DELETE -H "Authorization: Bot ${token}"  "${url}"
 	fi	
+	if [ -z "${announcements_channel_id}" ]; then
+		echo -e "\nannouncements_channel_id was not detected"
+	else
+		url="https://discordapp.com/api/channels/${announcements_channel_id}"
+		curl -X DELETE -H "Authorization: Bot ${token}"  "${url}"
+	fi	 
 }
 
 destroy_docker_resources () {
