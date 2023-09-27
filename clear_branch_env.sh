@@ -90,14 +90,12 @@ destroy_docker_resources () {
 	export container_name=$(echo "${COMPOSE_PROJECT_NAME}"_wall_e)
 	export db_container_name=$(echo "${COMPOSE_PROJECT_NAME}"_wall_e_db)
 	export image_name=$(echo "${COMPOSE_PROJECT_NAME}"_wall_e | awk '{print tolower($0)}')
-	export website_image_name=$(echo "${COMPOSE_PROJECT_NAME}"_leveling_website | awk '{print tolower($0)}')
 	export network_name=$(echo "${COMPOSE_PROJECT_NAME}"_wall_e_network | awk '{print tolower($0)}')
 	export volume_name="${COMPOSE_PROJECT_NAME}_logs"
 
 	docker rm -f "${container_name}" "${db_container_name}"
 	docker volume rm "${volume_name}" || true
 	docker image rm "${image_name}" || true
-	docker image rm "${website_image_name}" || true
 	docker network rm "${network_name}" || true
 }
 
