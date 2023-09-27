@@ -7,7 +7,7 @@ branch_name="${1}"
 token="${2}"
 
 deleted_discord_branch_channels () {
-	branch_name=$(echo "${1}" | awk '{print tolower($0)}')
+ 	discord_channel_branch_name=$(echo "${1}" | awk '{print tolower($0)}')
 	token="${2}"
 
 	url="https://discordapp.com/api/users/@me/guilds"
@@ -22,25 +22,25 @@ deleted_discord_branch_channels () {
 
 	for (( i=0; i<${#list_of_channel_ids[@]}; i++ ))
 	do
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}" ]; then
 			branch_id="${list_of_channel_ids[$i]}"
 		fi
 
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}_logs" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}_logs" ]; then
 			log_channel_id="${list_of_channel_ids[$i]}"
 		fi
 
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}_bot_channel" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}_bot_channel" ]; then
 			reminder_channel_id="${list_of_channel_ids[$i]}"
 		fi
 
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}_council" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}_council" ]; then
 			council_channel_id="${list_of_channel_ids[$i]}"
 		fi
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}_mod_channel" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}_mod_channel" ]; then
 			mod_channel_id="${list_of_channel_ids[$i]}"
 		fi		
-		if [ "${list_of_channel_names[$i]}" = "${branch_name}_announcements" ]; then
+		if [ "${list_of_channel_names[$i]}" = "${discord_channel_branch_name}_announcements" ]; then
 			announcements_channel_id="${list_of_channel_ids[$i]}"
 		fi	  
 	done
