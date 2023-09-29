@@ -99,6 +99,7 @@ destroy_docker_resources () {
 	docker network rm "${network_name}" || true
 }
 
-deleted_discord_branch_channels "${branch_name}" "${token}"
-
-destroy_docker_resources "${branch_name}"
+if [ "${branch_name}" != "master" ]; then
+	deleted_discord_branch_channels "${branch_name}" "${token}"
+ 	destroy_docker_resources "${branch_name}"
+fi
