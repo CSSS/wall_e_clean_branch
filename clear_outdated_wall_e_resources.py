@@ -31,11 +31,11 @@ _, output = subprocess.getstatusoutput("docker ps -a --filter 'name=TEST_' --for
 docker_container_names = output.split("\n")[1:]
 
 current_prs = [
-    f"pr-{pr['number']}".lower()
+    f"pr-{pr['number']}"
     for pr in json.loads(requests.get("https://api.github.com/repos/CSSS/wall_e/pulls?state=open").text)
 ]
 current_branches = [
-    branch['name'].lower()
+    branch['name']
     for branch in json.loads(requests.get("https://api.github.com/repos/CSSS/wall_e/branches").text)
 ]
 
