@@ -40,7 +40,7 @@ current_branches = [
 ]
 
 branches_to_remove = []
-channels_to_delete = []
+channels_to_keep = []
 for docker_container_name in docker_container_names:
     print(f"iterating through container name [{docker_container_name}]")
     if re.search(r'_wall_e_db$', docker_container_name):
@@ -51,8 +51,9 @@ for docker_container_name in docker_container_names:
         if branch_name not in current_prs and branch_name not in current_branches:
             print(f"branch [{branch_name}] is valid to remove")
             branches_to_remove.append(branch_name)
-            channels_to_delete.append(branch_name_lower_case)
-            channels_to_delete.extend([
+        else:
+            channels_to_keep.append(branch_name_lower_case)
+            channels_to_keep.extend([
                 f"{branch_name_lower_case}{discord_channel_suffix}"
                 for discord_channel_suffix in DISCORD_CHANNEL_SUFFIXES
             ])
@@ -113,7 +114,7 @@ while (not successful) and (attempt < retry_limit):
 
 for channel in channels:
     channel_name = channel.get("name", None)
-    if channel_name in channels_to_delete:
+    if channel_name not in channels_to_keep:
         url = f"https://discordapp.com/api/channels/{channel['id']}"
         response = requests.delete(url, headers=header)
         print(f"DELETE {url}")
