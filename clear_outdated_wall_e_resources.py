@@ -40,7 +40,7 @@ current_branches = [
 ]
 
 branches_to_remove = []
-channels_to_keep = []
+channels_to_keep = ["Text Channels", "Voice Channels", "general", "observation-room", "builds"]
 for docker_container_name in docker_container_names:
     print(f"iterating through container name [{docker_container_name}]")
     if re.search(r'_wall_e_db$', docker_container_name):
